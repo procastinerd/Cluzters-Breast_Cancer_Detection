@@ -10,22 +10,33 @@ Original file is located at
 import pickle
 import numpy as np
 import pandas as pd
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 
-model = pickle.load(open('model.pkl', 'rb'))
-class_names = ['0', '1']
+model = pickle.load(open('model.pkl', 'rb'))    #importing model file
+with open('pca.pkl', 'rb') as pickle_file:      #importing pca file
+      pca = pickle.load(pickle_file)
+scaler = pickle.load(open('scaler.pkl','rb'))   #importing standard scaler file
 
-def predict(dataset): 
-   
-    dataset = dataset[["radius_mean",	"texture_mean",	"perimeter_mean",	"area_mean",	"smoothness_mean",	"compactness_mean",	"concavity_mean",	"concave points_mean",	"symmetry_mean",	"fractal_dimension_mean",
-   	"radius_se",	"texture_se",	"perimeter_se",	"area_se",	"smoothness_se",	"compactness_se",	"concavity_se",	"concave points_se",	"symmetry_se",	"fractal_dimension_se", "radius_worst",	"texture_worst",	"perimeter_worst",
-    "area_worst",	"smoothness_worst",	"compactness_worst",	"concavity_worst",	"concave points_worst",	"symmetry_worst",	"fractal_dimension_worst"]]
+class_names = ['Benign tumor','Malign tumor']
+data= pd.read_csv('test.csv')
 
-    numpy_array = dataset.to_numpy()
-  
-    predictions = model.predict(numpy_array)
+def predict(data): 
+    
+    data = data[["radius_mean",	"texture_mean",	"perimeter_mean","area_mean",	"smoothness_mean",	"compactness_mean",	"concavity_mean",
+                       "concave points_mean",	"symmetry_mean",	"fractal_dimension_mean", 'radius_se','texture_se',  'perimeter_se', 'area_se',       
+                        'smoothness_se', 'compactness_se', 'concavity_se','concave points_se','symmetry_se','fractal_dimension_se',  "radius_worst",	"texture_worst",
+                        "perimeter_worst","area_worst",	"smoothness_worst",	"compactness_worst",	"concavity_worst",	"concave points_worst",	"symmetry_worst",	"fractal_dimension_worst"]]
+    
+    scaler.transform(data)
+    pca_scaled_data = pca.fit_transform(data)
+    predictions = model.predict(pca_scaled_data)
 
-    output= [class_names[class_predicted] for class_predicted in predictions]
-    if output == 0:
-         return ('THE PATIENT IS MORE LIKELY TO HAVE A BENIGN CANCER.')
-    else:
-         return ('THE PATIENT IS MORE LIKELY TO HAVE A MALIGNANT CANCER. ')
+    output = [class_names[i] for i in predictions]
+    return output
+
+predict(data)
+
+data
+
+data= data.drop("Unnamed: 0",axis=1)
