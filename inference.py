@@ -37,6 +37,6 @@ def predict(data):
 
 predict(data)
 
-data
+#data
 
-data= data.drop("Unnamed: 0",axis=1)
+#data= data.drop("Unnamed: 0",axis=1)
