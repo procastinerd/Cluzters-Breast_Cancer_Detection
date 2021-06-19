@@ -13,7 +13,7 @@ import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-model = pickle.load(open('model.pkl', 'rb'))    #importing model file
+model = pickle.load(open('rf_model.pkl', 'rb'))    #importing model file
 with open('pca.pkl', 'rb') as pickle_file:      #importing pca file
       pca = pickle.load(pickle_file)
 scaler = pickle.load(open('scaler.pkl','rb'))   #importing standard scaler file
