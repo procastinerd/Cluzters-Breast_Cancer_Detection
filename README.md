@@ -3,4 +3,4 @@ Accurate diagnosis is one of the most important processes in breast cancer treat
 I have performed an analysis of the **Breast Cancer Wisconsin (Diagnostic) DataSet**, obtained from Kaggle. This data set was created by Dr. William H. Wolberg, physician at the University Of Wisconsin Hospital at Madison, Wisconsin,USA.  
 Data visualization and machine learning techniques including logistic regression, k-nearest neighbors, support vector classifier, random forest were applied to this dataset.  
 Python were chosen to be applied to these machine learning techniques and visualization.  Data visualization and machine learning techniques can provide significant benefits and impact cancer detection in the decision-making process.   
-Results obtained with the **logistic Regression** with all features included showed the highest classification accuracy (97.2%), 
+Results obtained with the **Random Forest Classifier** with all features included showed the highest classification accuracy (95.8%), 
