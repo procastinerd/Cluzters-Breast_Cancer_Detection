@@ -410,9 +410,9 @@ models.sort_values(by = 'Score', ascending = False)
 import pickle
 
 filename= "model.pkl"
-#exporting logistic reg model
+#exporting random forest model
 model_pkl= open(filename, 'wb')
-data = pickle.dump(pca_model, model_pkl)
+data = pickle.dump(rand_clf, model_pkl)
 
 model_pkl.close()
 
